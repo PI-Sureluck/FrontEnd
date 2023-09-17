@@ -7,24 +7,13 @@
                   <input id="nome" name="nome" placeholder="Nome" type="text">
               </div>
               <div class="input1">
-                  <input id="sobrenome" name="sobrenome" placeholder="Sobrenome" type="text">
+                  <input id="link" name="link" placeholder="Link" type="url">
               </div>
               <div class="input">
-                  <input id="email" name="email" placeholder="E-mail" type="email">
-              </div>
-              <div class="input">
-                  <input id="username" name="username" placeholder="Usuário" type="text">
-              </div>
-              <div class="input">
-                  <input id="senha" name="senha" placeholder="Senha" type="password">
+                  <input id="categoria" name="categoria" placeholder="Categoria" type="text">
               </div>
               <div id="button">
                   <button type="submit">CONFIRMAR</button>
-              </div>
-              <div id="links">
-              <nav class="links">
-                <RouterLink to="/login">Já possui uma conta?</RouterLink>
-              </nav>
               </div>
           </form>
       </div>
@@ -126,17 +115,5 @@
         background: #149b1b;
     }
     
-    .links {
-        background-color: transparent;
-        overflow: hidden;
-        margin-top: 20px;
-        margin-bottom: -20px;
-    }
-    .links a {
-        float: center;
-        padding: 50px;
-        text-decoration: none;
-        font-size: 15px;
-    }
 
     </style>
