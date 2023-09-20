@@ -9,8 +9,8 @@
               <div class="input1">
                   <input id="link" name="link" placeholder="Link" type="url">
               </div>
-              <div class="input">
-                  <input id="categoria" name="categoria" placeholder="Categoria" type="text">
+              <div class="input1">
+                  <input id="imagem" name="imagem" placeholder="Imagem" type="url">
               </div>
               <div id="button">
                   <button type="submit">CONFIRMAR</button>
@@ -52,6 +52,14 @@
         color: #1BCC23;
     }
     
+    .id{
+        min-width: 200px;
+        border-radius: 100px;
+        color: #000000;
+        padding: 5px;
+        margin: 10px 0px 12px -5px;
+    }
+
     .titulo{
         font-size: 0.7cm;
         margin-bottom: 5%;

@@ -4,14 +4,23 @@
       <nav>
         <RouterLink to="/">Home</RouterLink>
       </nav>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">Conta</button>
-        <div class="dropdown-content">
-          <a href="/cadastro">Cadastro de usuário</a>
-          <a href="/cadastro-casa-de-aposta">Cadastro de casa de aposta</a>
+        <div class="dropdown">
+
+          <button class="dropbtn">Conta</button>
+             <div class="dropdown-content">
+              <a href="/cadastro">Cadastro de usuário</a>
+              <a href="/cadastro-casa-de-aposta">Cadastro de casa de aposta</a>
       </div>
+
     </div>
+     <div class="lista_sites_cadastrados">
+      <nav>
+      <RouterLink to="/lista_sites_cadastrados">Lista de Cadastros</RouterLink>
+      </nav>
+     </div>
+
+    </div>
+
     </header>
 </template>
 
@@ -32,7 +41,7 @@
 }
 .navbars a {
   float: left;
-  color: #1BCC23;;
+  color: #4ef3ff;;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 18px;
@@ -40,13 +49,14 @@
 
 .navbars a:hover {
   background-color: hsla(160, 100%, 37%, 0.2);
-  color: #1BCC23;
+  color: #4ef3ff;
 }
 
 .dropbtn {
   background-color: transparent;
   overflow: hidden;
-  color:#1BCC23;
+  color:#4ef3ff;
+  padding: 2rem;
   cursor: pointer;
   border: none;
   outline: none;
@@ -55,7 +65,7 @@
 }
 
 .dropdown {
-  display: inline-block;
+  display: block;
 }
 
 .dropdown-content {
@@ -81,5 +91,6 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 
 </style>
