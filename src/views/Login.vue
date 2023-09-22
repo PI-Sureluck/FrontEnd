@@ -5,11 +5,6 @@
             <div id="cadastro">
         
             <form class="flex justify-center items-center flex-col forms" action="">
-              <div class="input flex flex-col">
-                <span class="spanstyle">Username</span>
-                  <el-input  placeholder="Username"  class="inputs" v-model="Username"></el-input>
-
-              </div>
               <div class="input flex  flex-col">
                 <span class="spanstyle">Email</span>
                   <el-input type="email"  class="inputs" pattern=".+@globex\.com" placeholder="Email" v-model="Email"></el-input>
@@ -20,26 +15,18 @@
                   <el-input type="password" class="inputs"  show-password="true" size="medium" autocomplete="off" placeholder="Password" v-model="Password"></el-input>
 
               </div>              
-              <div class="input flex  flex-col">
-                <div>
-                  <span class="" style="color: white; font-weight: bold;">Password Confirmation</span>
-                  
-                </div>
-                  <el-input type="password" class="inputs" show-password="true" autocomplete="off" placeholder="Password Confirmation" v-model="PasswordConfirmation"></el-input>
-              </div>
               
             </form>
             <div class="flex justify-center items-center flex-col forms">
-                <button  @click="registration()" class="btn " >Sign Up</button>
+                <button  @click="registration()" class="btn " >Sign In</button>
             
             </div>
         </div>
         <div class="flex justify-center items-start flex-col forms" >
-              <img  src="../static/sureluck-logo.png" style=" padding-left: 2%; margin-top: 11%; width: 45%;" alt="">
+              <img  src="../static/sureluck-logo.png" style=" padding-left: 2%; margin-top: 3.5%; width: 45%;" alt="">
             </div>
         </div>
-
-         
+            
             
       </div>
     
@@ -54,62 +41,15 @@
         data() {
     
     return {
-      Username: '',
       Email: '',
       Password: '',
-      PasswordConfirmation: '',
+
     }
    
   },
   methods: {
-    async registration(){
-        if(this.Email != "" && this.Username != "" && this.Password != "" && this.PasswordConfirmation != ""){
-            if(this.Password == this.PasswordConfirmation){
-
-                const {data, status} = await axios({
-                    method: "POST",
-                    url: "http://127.0.0.1:8000/users/user/",
-                    data: {
-                        name: this.Username,
-                        email: this.Email,
-                        password: this.Password
-                    }}).catch((error) => {
-                             alert("Erro")
-                            return {
+   
     
-                                msg: "só um aviso foda"
-                            };
-                            });
-                console.log(data)
-                if (status === 200) {
-                  this.$message({
-                    message: "registered successfully",
-                    type: "success",
-                  });
-                } else
-                  this.$message({
-                    message: "registered error",
-                    type: "danger",
-            });
-                this.Email = "" 
-                this.Username = "" 
-                this.Password = ""  
-                this.PasswordConfirmation = ""    
-                
-            }else{
-                this.$message({
-                    message: "passwords don't match",
-                    type: "danger",
-            });
-            }
-          }else{
-
-            this.$message({
-                    message: "there are missing fields",
-                    type: "danger",
-            });
-        }
-    }
 
   }
 }
@@ -184,11 +124,6 @@ select {
     padding: 8px 30px 8px 30px;
     
 }
-.spanstyle{
-        color: rgb(255, 255, 255);
-        font-weight: bold;
-       
-    }
     
  
 
@@ -200,7 +135,7 @@ select {
     }
     #contCad {
         width: 60em;
-        height: 40em;
+        height: 30em;
         border-radius: 30px;
         background-color: #283352;
     }
