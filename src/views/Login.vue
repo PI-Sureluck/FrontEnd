@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="flex justify-center items-start flex-col forms" >
-              <img  src="../static/sureluck-logo.png" style=" padding-left: 2%; margin-top: 6%; width: 45%;" alt="">
+              <img  src="../static/sureluck-logo.png" style=" padding-left: 2%; margin-top: 3.5%; width: 45%;" alt="">
             </div>
         </div>
             
