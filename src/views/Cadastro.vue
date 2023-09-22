@@ -1,95 +1,236 @@
 <template>
+    <div class=" center flex justify-center items-center ">
+        
+        <div id="contCad" class="bg-white w-96 h-96 ">
+            <div id="cadastro">
+        
+            <form class="flex justify-center items-center flex-col forms" action="">
+              <div class="input flex flex-col">
+                <span class="spanstyle">Username</span>
+                  <el-input  placeholder="Username"  class="inputs" v-model="Username"></el-input>
 
-    <div id="cadastro">
-          <form  action="">
-              <h2 class="titulo">CADASTRE-SE</h2>
-              <div class="input1">
-                  <input id="nome" name="nome" placeholder="Nome" type="text">
               </div>
-              <div class="input1">
-                  <input id="sobrenome" name="sobrenome" placeholder="Sobrenome" type="text">
+              <div class="input flex  flex-col">
+                <span class="spanstyle">Email</span>
+                  <el-input type="email"  class="inputs" pattern=".+@globex\.com" placeholder="Email" v-model="Email"></el-input>
+
+              </div>              
+              <div class="input flex  flex-col " >
+                <span class="spanstyle">Password</span>
+                  <el-input type="password" class="inputs"  show-password="true" size="medium" autocomplete="off" placeholder="Password" v-model="Password"></el-input>
+
+              </div>              
+              <div class="input flex  flex-col">
+                <div>
+                  <span class="" style="color: white; font-weight: bold;">Password Confirmation</span>
+                  
+                </div>
+                  <el-input type="password" class="inputs" show-password="true" autocomplete="off" placeholder="Password Confirmation" v-model="PasswordConfirmation"></el-input>
               </div>
-              <div class="input">
-                  <input id="email" name="email" placeholder="E-mail" type="email">
-              </div>
-              <div class="input">
-                  <input id="username" name="username" placeholder="Usuário" type="text">
-              </div>
-              <div class="input">
-                  <input id="senha" name="senha" placeholder="Senha" type="password">
-              </div>
-              <div id="button">
-                  <button type="submit">CONFIRMAR</button>
-              </div>
-              <div id="links">
-              <nav class="links">
-                <RouterLink to="/login">Já possui uma conta?</RouterLink>
-              </nav>
-              </div>
-          </form>
+              
+            </form>
+            <div class="flex justify-center items-center flex-col forms">
+                <button  @click="registration()" class="btn " >Sign Up</button>
+            
+            </div>
+        </div>
+        <div class="flex justify-center items-start flex-col forms" >
+              <img  src="../static/sureluck-logo.png" style=" padding-left: 2%; margin-top: 11%; width: 45%;" alt="">
+            </div>
+        </div>
+
+         
+            
       </div>
     
+      
     </template>
     
     <script>
+     import axios, * as others from 'axios';
+    export default {
+       
+
+        data() {
+    
+    return {
+      Username: '',
+      Email: '',
+      Password: '',
+      PasswordConfirmation: '',
+    }
+   
+  },
+  methods: {
+    async registration(){
+        if(this.Email != "" && this.Username != "" && this.Password != "" && this.PasswordConfirmation != ""){
+            if(this.Password == this.PasswordConfirmation){
+
+                const {data, status} = await axios({
+                    method: "POST",
+                    url: "http://127.0.0.1:8000/users/user/",
+                    data: {
+                        name: this.Username,
+                        email: this.Email,
+                        password: this.Password
+                    }}).catch((error) => {
+                             alert("Erro")
+                            return {
+    
+                                msg: "só um aviso foda"
+                            };
+                            });
+                console.log(data)
+                if (status === 200) {
+                  this.$message({
+                    message: "registered successfully",
+                    type: "success",
+                  });
+                } else
+                  this.$message({
+                    message: "registered error",
+                    type: "danger",
+            });
+                this.Email = "" 
+                this.Username = "" 
+                this.Password = ""  
+                this.PasswordConfirmation = ""    
+                
+            }else{
+                this.$message({
+                    message: "passwords don't match",
+                    type: "danger",
+            });
+            }
+          }else{
+
+            this.$message({
+                    message: "there are missing fields",
+                    type: "danger",
+            });
+        }
+    }
+
+  }
+}
     
     </script>
     
     <style scoped>
         @import url('https://fonts.googleapis.com/css2?family=Mukta&family=Quicksand:wght@600&family=Rubik&display=swap');
     
+        
     *{
         margin: 0;
         padding: 0;
+        }
+    .inputs {
+  border-radius: 5px;
+  margin-top: 0.5em;
+  margin-bottom: -1em;
+  background-color: #000000;
+  width: 400px;
+  height: 3em;
+    }
+    .spanstyle{
+        color: white;
+        font-weight: bold;
     }
     
+
+    input,
+select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 300px;
+}
+    .btn {
+    
+    font-family: Arial;
+
+    color: #ffffff;
+    font-size: 0.5cm;
+    padding: 10px 50px 10px 50px;
+    margin-top: 2em;
+    border: solid #D98E04 2px;
+    text-decoration: none;
+    }
+
+  
+
+    .btn:hover {
+    background-color: #D98E04;
+    font-size: 0.5cm;
+    padding: 10px 50px 10px 50px;
+    
+}
+
+
+.btn1 {
+    
+    font-family: Arial;
+    border-radius: 1em;
+    color: #ffffff;
+    font-size: 0.4cm;
+    margin: 0.5cm;
+    padding: 8px 30px 8px 30px;
+    border: solid #D98E04 2px;
+    text-decoration: none;
+    }
+
+    .btn1:hover {
+    background-color: #D98E04;
+    font-size: 0.4cm;
+    padding: 8px 30px 8px 30px;
+    
+}
+.spanstyle{
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+       
+    }
+    
+ 
+
     body{
         width: 100%;
         height: 100vh;
         font-family: 'Mukta', sans-serif;
         background-color: #adaaa1;
     }
+    #contCad {
+        width: 60em;
+        height: 40em;
+        border-radius: 30px;
+        background-color: #283352;
+    }
+    .center{
+        position: absolute;
+        top: 5em; bottom: 0;
+        left: 0; right: 0;
+        margin: auto;
+    }
+    
     
     #cadastro{
         position: absolute;
         top: 50%;
-        left: 50%;
+        left: 60%;
         transform: translate(-50%, -50%);
-        background: #FAF9F6;
-        border-radius: 10px;
-        padding: 60px;
-        width: min-content;
+        background: #141C33;
+        border-radius: 20px;
+        padding: 30px;
+        width: auto;
+        height: auto;
         align-items: center;
-        color: #1BCC23;
+        color: #D98E04;
     }
     
-    .titulo{
-        font-size: 0.7cm;
-        margin-bottom: 5%;
-    }
-    
-    .input1{
-        min-width: 200px;
-        border-radius: 100px;
-        border: 2px #1BCC23 solid;
-        padding: 5px;
-        margin: 10px 0px 12px -5px;
-    }
-    
-    .input1 input{
-        width: 88%;
-        border: none;
-        outline: none;
-        font-family: 'Mukta', sans-serif;
-        transform: translateX(5%);
-        color: #000000;
-        font-size: 15px;
-    }
+  
     
     .input{
         min-width: 250px;
         border-radius: 100px;
-        border: 2px #1BCC23 solid;
         padding: 6px;
         margin: 10px 0px 12px -5px;
     }
@@ -104,27 +245,6 @@
         font-size: 15px;
     }
     
-    #button{
-        margin-top: 20px;
-        text-align: center;
-    }
-    
-    #button button{
-        font-family: 'Mukta', sans-serif;
-        background: #1BCC23;
-        width: 40%;
-        height: 30px;
-        border-radius: 100px;
-        border: none;
-        font-size: 16px;
-        color: #FAF9F6;
-        outline: none;
-        cursor: pointer;
-    }
-    
-    #button button:hover{
-        background: #149b1b;
-    }
     
     .links {
         background-color: transparent;

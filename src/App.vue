@@ -7,12 +7,14 @@ import Navbar from './components/Navbar.vue'
 
   <Navbar />
   <RouterView />
+  
+
 </template>
 
 <style>
   body {
   min-height: 100vh;
-  background: #222222;
+  background: #868686;
   transition:
     color 0.5s,
     background-color 0.5s;
