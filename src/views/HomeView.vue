@@ -126,7 +126,7 @@
             <el-input type="text"  class="inputs"  size="large" placeholder="Valor" v-model="name"></el-input>
             
           </div>                          
-          
+                              <el-button size="large" @click="dialogo = true">Calcular</el-button>
         </form>
       </div>
     </template>
