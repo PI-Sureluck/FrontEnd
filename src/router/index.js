@@ -5,6 +5,7 @@ import Cadastro_aposta from '../views/Cadastro_aposta.vue'
 import login from '../views/Login.vue'
 import Sites from '../views/Sites.vue'
 import Users from '../views/Users.vue'
+import Lista from '../views/Lista.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,7 +39,12 @@ const router = createRouter({
       path: '/users',
       name: 'Users',
       component: Users
-    }
+    },
+    {
+      path: '/lista',
+      name: 'Lista',
+      component: Lista
+    },
 
 
   ]
