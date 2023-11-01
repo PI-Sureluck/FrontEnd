@@ -46,7 +46,7 @@
    
   },
   mounted(){
-    axios.get('http://127.0.0.1:8000/sites/site/')
+    axios.get('http://127.0.0.1:5173/Sites/')
       .then(response => this.lista_sites = response.data)
   }
 }
