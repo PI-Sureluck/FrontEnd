@@ -1,5 +1,6 @@
 <template>
-    <div class=" center flex justify-center items-center ">
+   <form @submit.prevent="handleSubmit">
+   <div class=" center flex justify-center items-center ">
         
         <div id="contCad" class="bg-white w-96 h-96 ">
             <div id="cadastro">
@@ -29,6 +30,7 @@
             
             
       </div>
+    </form>
     
       
     </template>
@@ -37,7 +39,6 @@
      import axios, * as others from 'axios';
     export default {
        
-
         data() {
     
     return {
@@ -48,7 +49,14 @@
    
   },
   methods: {
-   
+    async handleSubmit(){
+        const response = await axios.post('login', {
+            Email: this.Email,
+            Password: this.Password
+        });
+
+        console.log(response);
+    }
     
 
   }
