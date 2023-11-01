@@ -55,6 +55,11 @@
 
         <form class="" action="">
           <div class="pt-3">
+            <a class="spanstyle">Logo</a>
+            <el-input type="text"  class="inputs"  size="large" placeholder="Logo" v-model="logo"></el-input>
+            
+          </div>  
+          <div class="pt-3">
             <a class="spanstyle">Name</a>
             <el-input type="text"  class="inputs"  size="large" placeholder="Name" v-model="name"></el-input>
             
@@ -86,6 +91,11 @@
       <div class="flex justify-start items-center flex-col">
 
         <form class="" action="">
+          <div class="pt-3">
+            <a class="spanstyle">Logo</a>
+            <el-input type="text"  class="inputs"  size="large" placeholder="Logo" v-model="logo"></el-input>
+            
+          </div>   
           <div class="pt-3">
             <a class="spanstyle">Name</a>
             <el-input type="text"  class="inputs"  size="large" placeholder="Name" v-model="name"></el-input>
