@@ -1,6 +1,7 @@
 <template>
     
   <div class="relative shadow-md sm:rounded-lg w-full">
+    <!--head-->
     <div class="flex items-center justify-between pb-4 py-4 p-10">
       <div>
         <button @click="toggleDropdown" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
@@ -55,82 +56,46 @@
           <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
       </div>
   </div>
-  <div class="block bg-transparent content-center">
-  <div class="flex justify-center items-center">
-    <div class="relative shadow-md sm:rounded-lg w-full max-w-3xl">
-  <table class="w-full relative flex justify-between pt-1">
-      <tbody class="divide-y divide-gray-100">
-          <tr class="border-b-2">
-              <th scope="row" class="px-6 py-10 font-medium tracking-wide">
-                  <tr v-for="(aposta, i) in aposta" :key="'i'">
-                  <th class="w-40 p-3 text-sm">{{ aposta.name }}</th>
-                  <th class="w-40 p-3 text-sm">{{ aposta.date }}</th>
-                  <td class="w-60 p-3 text-sm">{{ aposta.teamA }}</td>
-                  <td class="w-40 p-3 text-sm">{{ aposta.bets }}</td>
-                  <td class="w-60 p-3 text-sm">{{ aposta.teamB }}</td>
-                  <td class="w-30 px-6 py-4">
-                    <el-button size="large" @click="dialogo = true">Calcular</el-button>
-              </td>
-              </tr>
-              </th>
-          </tr>
-      </tbody>
-  </table>
+  
+  
+  <!--cards-->  
+  <div class="py-4 p-10">
+  <div class="grid grid-cols-1 grid-rows-50 gap-x-0.5 gap-y-8 md:grid-cols-2">
+
+    <div class="pb-5" v-for="(aposta, index) in aposta" :key="index">
+    <div
+  class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 custom-card">
+  
+  <div
+    class="text-left font-bold uppercase border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50 header-card">
+    {{ aposta.name }}
   </div>
+  <div class="flex justify-between p-6">
+    <h5
+      class="p-2 text-xl font-medium italic leading-tight text-neutral-800 dark:text-neutral-50">
+      {{ aposta.teamA }} <p></p> {{ aposta.teamB }}
+    </h5>
+    <p class="border-dashed border-2 rounded-md p-2 text-base text-neutral-600 dark:text-neutral-200 odds-layout">
+      {{ aposta.bet1 }} <p></p> {{ aposta.bet2 }}
+    </p>
   </div>
-  </div>
-  <div class ="py-4 p-10">
-  <nav class="flex items-center justify-between pt-4" aria-label="Table navigation">
-      <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span class="font-semibold text-gray-900 dark:text-white">1000</span></span>
-      <ul class="inline-flex -space-x-px text-sm h-8">
-          <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-          </li>
-          <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-          </li>
-          <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-          </li>
-          <li>
-              <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-          </li>
-          <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-          </li>
-          <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-          </li>
-          <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-          </li>
-      </ul>
-  </nav>
+  <div
+    class="flex justify-between border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50 footer-card">
+    
+    <el-input type="number" class="leading-tight input-calcular" placeholder="Valor (R$)" v-model="valor"></el-input>
+    <label class="text-right block">
+      <label class="font-bold mb-2">{{ aposta.teamA }} retorna </label> = R${{ valor*(aposta.porcent1/100) }}<p></p>
+      <label class="font-bold mb-2">{{ aposta.teamB }} retorna </label> = R${{ valor*(aposta.porcent2/100) }}
+    </label>
+  </div>  
   </div>
 </div>
-
-<el-dialog
-    v-model="dialogo"
-    width="30%"
     
-  >
-    <template #footer>
-      <div class="flex justify-start items-center flex-col">
-        <h1 class="font  " ><b>Calcular Aposta</b></h1>
-      </div>
-      <div class="flex justify-start items-center flex-col">
 
-        <form class="" action="">
-          <div class="pt-3">
-            <a class="spanstyle">Valor</a>
-            <el-input type="text"  class="inputs"  size="large" placeholder="Valor" v-model="name"></el-input>
-            
-          </div>                          
-                              <el-button size="large" @click="dialogo = true">Calcular</el-button>
-        </form>
-      </div>
-    </template>
-  </el-dialog>
+
+</div>
+</div>  
+  </div>
 
 
 </template>
@@ -148,16 +113,17 @@ import { onMounted, ref } from 'vue';
   return {
     showDropdown: false,
     dialogo: false,
+    valor: '',
     aposta: [ // TEMPORÁRIO
-        {name: 'aposta 1', date: '03 nov 2023', teamA: 'time1', teamB: 'time2', bets:'3.1 - 2.1'},
-        {name: 'aposta 1', date: '03 nov 2023', teamA: 'time1', teamB: 'time2', bets:'3.1 - 2.1'},
-        {name: 'aposta 1', date: '03 nov 2023', teamA: 'time1', teamB: 'time2', bets:'3.1 - 2.1'},
-        {name: 'aposta 1', date: '03 nov 2023', teamA: 'time1', teamB: 'time2', bets:'3.1 - 2.1'},
-        {name: 'aposta 1', date: '03 nov 2023', teamA: 'time1', teamB: 'time2', bets:'3.1 - 2.1'},
-        {name: 'aposta 1', date: '03 nov 2023', teamA: 'time1', teamB: 'time2', bets:'3.1 - 2.1'},
-        {name: 'aposta 1', date: '03 nov 2023', teamA: 'time1', teamB: 'time2', bets:'3.1 - 2.1'},
-        {name: 'aposta 1', date: '03 nov 2023', teamA: 'time1', teamB: 'time2', bets:'3.1 - 2.1'},
-        {name: 'aposta 1', date: '03 nov 2023', teamA: 'time1', teamB: 'time2', bets:'3.1 - 2.1'},
+        {name: 'Aposta 1', date: '03 nov 2023', teamA: 'Time fulano', teamB: 'Time ciclano', bet1:'3', bet2: '2.1', porcent1: '75', porcent2: '25'},
+        {name: 'aposta 2', date: '03 nov 2023', teamA: 'time2', teamB: 'time02', bet1:'3.1', bet2: '2.1', porcent1: '60', porcent2: '40'},
+        {name: 'aposta 3', date: '03 nov 2023', teamA: 'time3', teamB: 'time92', bet1:'3.1', bet2: '2.1', porcent1: '75', porcent2: '25'},
+        {name: 'aposta 4', date: '03 nov 2023', teamA: 'time4', teamB: 'time82', bet1:'3.1', bet2: '2.1', porcent1: '75', porcent2: '25'},
+        {name: 'aposta 5', date: '03 nov 2023', teamA: 'time5', teamB: 'time62', bet1:'3.1', bet2: '2.1', porcent1: '75', porcent2: '25'},
+        {name: 'aposta 6', date: '03 nov 2023', teamA: 'time6', teamB: 'time52', bet1:'3.1', bet2: '2.1', porcent1: '75', porcent2: '25'},
+        {name: 'aposta 7', date: '03 nov 2023', teamA: 'time7', teamB: 'time42', bet1:'3.1', bet2: '2.1', porcent1: '75', porcent2: '25'},
+        {name: 'aposta 8', date: '03 nov 2023', teamA: 'time8', teamB: 'time13', bet1:'3.1', bet2: '2.1', porcent1: '75', porcent2: '25'},
+        {name: 'aposta 9', date: '03 nov 2023', teamA: 'time9', teamB: 'time12', bet1:'3.1', bet2: '2.1', porcent1: '75', porcent2: '25'},
 
     ]
 
@@ -196,29 +162,37 @@ body{
         font-family: 'Mukta', sans-serif;
         background-color: #adaaa1;
     }
-    table{
-        background: #141C33;
-        border-radius: 20px;
-        padding: 20px;
-        width: auto;
-        height: auto;
-        align-items: center;
-        color: white;
-    }
+  
 
-      th, td {
-          border: 1px solid #283352;
-          padding: 15px; 
-          text-align: center;
+      .custom-card {
+        font-family: 'Mukta', sans-serif;
+  max-width: 650px; 
+  background-color: #283352;
+  color: #ffffff;
+  
+}
+
+.header-card{
+        background-color: #141C33;
+        color: #ffffff;
+        border-radius: 8px;
+      }
+      .footer-card{
+        background-color: #D98E04;
+        color: #ffffff;
+        border-radius: 8px;
       }
 
-      th {
-          background-color: #283352;
+      .input-calcular{
+        max-width: 210px;
+        padding: 5px; 
       }
 
-      tr:nth-child(even) {
-          background-color: #141C33;
+      .odds-layout{
+        background-color: #141C33;
+        width: 100px;
+        text-align: center;
+        letter-spacing: 2px;
+        border: transparent;
       }
-
-
 </style>

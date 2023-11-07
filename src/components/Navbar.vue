@@ -13,7 +13,7 @@
           <RouterLink to="/" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Home</RouterLink>
         </li>   
         <li class="mr-1" >
-          <RouterLink to="/Lista" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Casas de Aposta</RouterLink>
+          <RouterLink to="/Sites" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Casas de Aposta</RouterLink>
         </li>
         <li class=" mr-1">
           <RouterLink to="/Login" class=" btn" @click="dialogVisible = true" >Sign In</RouterLink>
