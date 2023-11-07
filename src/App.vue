@@ -15,7 +15,8 @@ import Footer from './components/FooterSure.vue'
 <style>
   body {
   min-height: 100vh;
-  background: #ffffff;
+  background: #e1dfdf;
+
   transition:
     color 0.5s,
     background-color 0.5s;
