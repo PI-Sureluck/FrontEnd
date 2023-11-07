@@ -1,4 +1,5 @@
 <template>
+
   <div class="container" style="  margin: 0 auto; width: 80%;">
     <div class="row justify-content-center align-content-center">
       <div class="col-md-8">
@@ -121,12 +122,14 @@
   </div>
 
 
+
 </template>
 
 <script>
 
 import axios, * as others from 'axios';
 import {onMounted, ref} from 'vue';
+
 
 export default {
 
@@ -186,6 +189,7 @@ export default {
       }
     },
 
+
     toggleDropdown() {
       this.showDropdown = !this.showDropdown;
 
@@ -199,6 +203,7 @@ export default {
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=Mukta&family=Quicksand:wght@600&family=Rubik&display=swap');
+
 
 
 * {
@@ -233,6 +238,7 @@ body {
   background-color: #D98E04;
   color: #ffffff;
   border-radius: 8px;
+
 }
 
 .input-calcular {

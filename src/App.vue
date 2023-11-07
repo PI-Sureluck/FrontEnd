@@ -1,13 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
+import Footer from './components/FooterSure.vue'
 </script>
 
 <template>
 
   <Navbar />
   <RouterView />
-  
+
 
 </template>
 
@@ -15,6 +16,7 @@ import Navbar from './components/Navbar.vue'
   body {
   min-height: 100vh;
   background: #e1dfdf;
+
   transition:
     color 0.5s,
     background-color 0.5s;

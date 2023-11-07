@@ -2,25 +2,26 @@
 
 
 <template>
-    <div class="w-full flex justify-center ">
+    <div class="w-full flex justify-center content ">
       <!-- Table -->
 
       <div class="w-3/5  mt-3">
         <!-- HEADER -->
         <div class="">
           <div class="flex justify-between items-center pt-4 " >
-            <h1 class="font pl-5"><b>WebSites</b></h1>
+            <h1 class="font pl-5"><b>Casas de Apostas</b></h1>
             <el-row :gutter="1">
               <div class="display-flex justify-end ">
-                <el-button size="large" @click="dialogo = true">register</el-button>
+                <el-button size="large" @click="dialogo = true">Registrar</el-button>
               </div>
             </el-row>
           </div>
           <!-- TABLE -->
           <div class="flex">
+
             <el-table empty-text="No websites Indexed"  :data="websites" v-loading="loading" >
               <el-table-column label="Logo" prop="logo" />
-              <el-table-column label="Name" prop="name" />
+              <el-table-column label="Nome" prop="name" />
               <el-table-column label="Link" prop="link" />
               <el-table-column align="right">
                   <template #default="scope">
@@ -31,21 +32,21 @@
                     size="large"
                       type="danger"
                       @click="Delete(websites[scope.$index].id)"
-                      >Delete</el-button
+                      >Deletar</el-button
                     >
                   </template>
                 </el-table-column>
-             
+
             </el-table>
           </div>
         </div>
       </div>
     </div>
-    
+
     <el-dialog
     v-model="dialogo"
     width="30%"
-    
+
   >
     <template #footer>
       <div class="flex justify-start items-center flex-col">
@@ -57,24 +58,24 @@
           <div class="pt-3">
             <a class="spanstyle">Logo</a>
             <el-input type="text"  class="inputs"  size="large" placeholder="Logo" v-model="logo"></el-input>
-            
-          </div>  
+
+          </div>
           <div class="pt-3">
             <a class="spanstyle">Name</a>
             <el-input type="text"  class="inputs"  size="large" placeholder="Name" v-model="name"></el-input>
-            
-          </div>              
+
+          </div>
           <div class="pt-3" >
             <a class="spanstyle">Link</a>
             <el-input type="text" class="inputs"  show-link="true"  size="large" autocomplete="off" placeholder="link" v-model="link"></el-input>
-            
-          </div>              
-          
+
+          </div>
+
         </form>
       </div>
       <div class="flex justify-center items-center flex-col forms">
                 <button  @click="registration()" class="btn " >Register</button>
-            
+
             </div>
     </template>
   </el-dialog>
@@ -82,11 +83,11 @@
   <el-dialog
     v-model="dialogoedit"
     width="30%"
-    
+
   >
     <template #footer>
       <div class="flex justify-start items-center flex-col">
-        <h1 class="font  " ><b>Edit WebSites</b></h1>
+        <h1 class="font  " ><b>Editar Casas de Apostas</b></h1>
       </div>
       <div class="flex justify-start items-center flex-col">
 
@@ -94,35 +95,35 @@
           <div class="pt-3">
             <a class="spanstyle">Logo</a>
             <el-input type="text"  class="inputs"  size="large" placeholder="Logo" v-model="logo"></el-input>
-            
-          </div>   
+
+          </div>
           <div class="pt-3">
-            <a class="spanstyle">Name</a>
+            <a class="spanstyle">Nome</a>
             <el-input type="text"  class="inputs"  size="large" placeholder="Name" v-model="name"></el-input>
-            
-          </div>              
+
+          </div>
           <div class="pt-3" >
             <a class="spanstyle">Link</a>
             <el-input type="text" class="inputs"  show-link="true"  size="large" autocomplete="off" placeholder="link" v-model="link"></el-input>
-            
-          </div>              
-          
+
+          </div>
+
         </form>
       </div>
       <div class="flex justify-center items-center flex-col forms">
                 <button  @click="Edit()" class="btn " >Edit</button>
-            
+
             </div>
     </template>
   </el-dialog>
 
-    
+
 </template>
 
 <script>
 import axios, * as others from 'axios';
 export default {
-  
+
 
    data() {
 
@@ -134,27 +135,27 @@ export default {
       link: "",
       websites: [],
       idSite: 0,
-     
+
 
     }
   },
   mounted() {
     this.allData();
-    this.websites.push({ "id": 1, "name": "site22", "link2": "site.com.b2r", "logo2": "", "xpath2": "" })
+    this.websites.push({ "id": 1, "name": "siteee", "link2": "site.com.b2r", "logo2": "", "xpath2": "" })
   },
   methods: {
     async allData() {
-    
+
       try {
         const {data, status} = await axios.get('http://127.0.0.1:8000/sites/site/')
         console.log(data)
         if(status == 200){
-          
+
           this.websites = data.sites
           console.log(this.websites)
         }else{
           this.websites = []
-         
+
 
         }
       } catch (error) {
@@ -163,7 +164,7 @@ export default {
     },
     async registration(){
         if(this.name != "" && this.link != ""){
-            
+
                 const {data, status} = await axios({
                     method: "POST",
                     url: "http://127.0.0.1:8000/sites/site/",
@@ -189,8 +190,8 @@ export default {
                     message: "Website registered error",
                     type: "danger",
             });
-                this.name = "" 
-                this.link= "" 
+                this.name = ""
+                this.link= ""
                 this.dialogo= false
                 setTimeout(location.reload(), 5000);
           }else{
@@ -198,7 +199,7 @@ export default {
                     message: "there are missing fields",
                     type: "danger",
             });
-           
+
         }
     },
     async Delete(id) {
@@ -218,13 +219,13 @@ export default {
             message: "error when deleting website",
             type: "danger",
           });
-          this.name = "" 
-          this.link= "" 
+          this.name = ""
+          this.link= ""
           this.dialogo= false
           location.reload()
-          
 
-  
+
+
       } catch (error) {
         throw error;
       }
@@ -236,7 +237,7 @@ export default {
     },
     async Edit(){
       console.log("testteee" + this.idSite)
-            
+
                 const {data, status} = await axios({
                     method: "PUT",
                     url: "http://127.0.0.1:8000/sites/site/" + this.idSite,
@@ -262,11 +263,11 @@ export default {
                     message: "Website Edit error",
                     type: "danger",
             });
-                this.name = "" 
-                this.link= "" 
+                this.name = ""
+                this.link= ""
                 this.dialogo= false
                 setTimeout(location.reload(), 5000);
-           
+
         }
     },
 
@@ -283,7 +284,9 @@ export default {
   margin-bottom: 0.1em;
 }
 
-
+.content {
+  padding-bottom: 60px; /* Ajuste o valor para corresponder à altura do seu rodapé */
+}
 
 
 
@@ -292,7 +295,7 @@ export default {
         font-weight: bold;
         margin-right: 100%;
     }
-    
+
 .new-btn:hover {
   background-color: transparent;
   color: #222;
@@ -305,7 +308,7 @@ export default {
 
 
   .btn {
-    
+
     font-family: Arial;
 
     color: #000000;
@@ -317,13 +320,13 @@ export default {
     margin-bottom: 2.5em;
     }
 
-  
+
 
     .btn:hover {
     background-color: #D98E04;
     font-size: 0.5cm;
     padding: 10px 50px 10px 50px;
-    
+
 }
 
 </style>
