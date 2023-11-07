@@ -9,12 +9,12 @@
         <!-- HEADER -->
         <div class="">
           <div class="flex justify-between items-center pt-4 " >
-            <h1 class="font pl-5"><b>Users</b></h1>
+            <h1 class="font pl-5"><b>Usuário</b></h1>
           </div>
           <!-- TABLE -->
           <div class="flex">
             <el-table empty-text="No Users Indexed"  :data="Users" v-loading="loading" >
-              <el-table-column label="Name" prop="name" />
+              <el-table-column label="Nome" prop="name" />
               <el-table-column label="Email" prop="email" />
               <el-table-column align="right">
                   <template #default="scope">
@@ -22,7 +22,7 @@
                     size="large"
                       type="danger"
                       @click="Delete(Users[scope.$index].id)"
-                      >Delete</el-button
+                      >Deletar</el-button
                     >
                   </template>
                 </el-table-column>
@@ -48,7 +48,7 @@
 
         <form class="" action="">
           <div class="pt-3">
-            <a class="spanstyle">Name</a>
+            <a class="spanstyle">Nome</a>
             <el-input type="text"  class="inputs"  size="large" placeholder="Name" v-model="name"></el-input>
             
           </div>              

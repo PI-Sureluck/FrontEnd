@@ -11,9 +11,12 @@
       <ul class="font-medium content-center flex flex-col p-4  md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li class="mr-1">
           <RouterLink to="/" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Home</RouterLink>
-        </li>   
+        </li>
         <li class="mr-1" >
-          <RouterLink to="/Lista" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Casas de Aposta</RouterLink>
+          <RouterLink to="/Sites" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Casas de Aposta</RouterLink>
+        </li>
+        <li class="mr-1" >
+          <RouterLink to="/Users" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Usuários</RouterLink>
         </li>
         <li class=" mr-1">
           <RouterLink to="/Login" class=" btn" @click="dialogVisible = true" >Sign In</RouterLink>
@@ -22,10 +25,12 @@
           <RouterLink to="/Cadastro" class="btn" >Sign Up</RouterLink>
         </li>
       </ul>
-      
+
     </div>
   </div>
 </nav>
+
+
 
 </div>
 </template>
@@ -72,7 +77,7 @@ export default {
 }
 
 .btn {
-  
+
   font-family: Arial;
   margin-right: -15px;
   color: #ffffff;
@@ -86,7 +91,7 @@ export default {
   background-color: #D98E04;
   font-size: 15px;
   padding: 10px 18px 10px 18px;
-  
+
 }
 .navbars a {
   float: left;
@@ -163,7 +168,7 @@ export default {
         color: white;
         font-weight: bold;
     }
-    
+
 
     input,
 select {
@@ -172,7 +177,7 @@ select {
   width: 300px;
 }
     .btn {
-    
+
     font-family: Arial;
 
     color: #ffffff;
@@ -183,18 +188,18 @@ select {
     text-decoration: none;
     }
 
-  
+
 
     .btn:hover {
     background-color: #D98E04;
     font-size: 0.5cm;
     padding: 10px 50px 10px 50px;
-    
+
 }
 
 
 .btn1 {
-    
+
     font-family: Arial;
     border-radius: 1em;
     color: #ffffff;
@@ -209,10 +214,10 @@ select {
     background-color: #D98E04;
     font-size: 0.4cm;
     padding: 8px 30px 8px 30px;
-    
+
 }
-    
- 
+
+
 
     body{
         width: 100%;
@@ -232,8 +237,8 @@ select {
         left: 0; right: 0;
         margin: auto;
     }
-    
-    
+
+
     #cadastro{
         position: absolute;
         top: 50%;
@@ -247,16 +252,16 @@ select {
         align-items: center;
         color: #D98E04;
     }
-    
-  
-    
+
+
+
     .input{
         min-width: 250px;
         border-radius: 100px;
         padding: 6px;
         margin: 10px 0px 12px -5px;
     }
-    
+
     .input input{
         width: 88%;
         border: none;
@@ -266,8 +271,8 @@ select {
         color: #000000;
         font-size: 15px;
     }
-    
-    
+
+
     .links {
         background-color: transparent;
         overflow: hidden;
