@@ -14,7 +14,7 @@ import Navbar from './components/Navbar.vue'
 <style>
   body {
   min-height: 100vh;
-  background: #868686;
+  background: #e1dfdf;
   transition:
     color 0.5s,
     background-color 0.5s;
