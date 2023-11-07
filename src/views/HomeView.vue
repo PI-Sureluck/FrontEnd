@@ -158,7 +158,7 @@ export default {
       try {
         const {data, status} = await axios.get('http://127.0.0.1:8000/sites/surebets/')
         console.log(data)
-        if(status == 200){
+        if(data.status == 200){
           this.aposta = []
           for(var i =0 ; i< data.surebets.length; i++){
             var sure ={
