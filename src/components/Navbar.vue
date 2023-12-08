@@ -12,18 +12,21 @@
         <li class="mr-1">
           <RouterLink to="/" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Home</RouterLink>
         </li>
-        <li class="mr-1" >
+        <li class="mr-1" v-if="admin == True">
           <RouterLink to="/Sites" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Casas de Aposta</RouterLink>
         </li>
-        <li class="mr-1" >
+        <li class="mr-1"  v-if="admin == True">
           <RouterLink to="/Users" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Usuários</RouterLink>
         </li>
+        <button  @click="clearJwtCookieAndReload()" class="text-white " >Logout</button>
+        <!--
         <li class=" mr-1">
           <RouterLink to="/Login" class=" btn" @click="dialogVisible = true" >Sign In</RouterLink>
         </li>
         <li class="mr-1">
           <RouterLink to="/Cadastro" class="btn" >Sign Up</RouterLink>
-        </li>
+        </li
+        -->
       </ul>
 
     </div>
@@ -37,6 +40,9 @@
 
 <script>
 import { RouterLink } from 'vue-router';
+import axios from "axios";
+import Cookies from 'js-cookie';
+
 
 
 const dialogVisible = true
@@ -47,10 +53,47 @@ export default {
 
   data() {
     return {
+      name:'',
+      email:'',
+      admin: 0,
+      premio: 0
 
-
-    }},
+    }
+    }, mounted() {
+    this.allData();
+  },
   methods: {
+    clearJwtCookieAndReload() {
+  // Limpar o cookie JWT
+  Cookies.remove('jwt');
+
+  // Recarregar a página
+  window.location.reload(true);
+  },
+    getAuthToken() {
+          const cookies = document.cookie.split('; ');
+          const jwtCookie = cookies.find(cookie => cookie.startsWith('jwt='));
+          console.log(jwtCookie)
+          return jwtCookie ? jwtCookie.split('=')[1] : null;
+        },
+
+    async allData() {
+      try {
+        const token = this.getAuthToken();
+
+        const response = await axios.get('http://127.0.0.1:8000/users/User', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        const data = response.data;
+        console.log('Dados recebidos:', response.data);
+      } catch (error) {
+        console.error('Erro durante a solicitação:', error);
+      }
+    }
+
 
   }
 }

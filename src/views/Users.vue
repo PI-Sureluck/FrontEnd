@@ -2,6 +2,7 @@
 
 
 <template>
+    <Navbar />
     <div class="w-full flex justify-center ">
       <!-- Table -->
 
@@ -72,6 +73,8 @@
 
 <script>
 import axios, * as others from 'axios';
+import Navbar from '../components/Navbar.vue'
+
 export default {
   
 
@@ -85,19 +88,44 @@ export default {
       email: "",
       Users: [],
       idSite: 0,
-     
+      pageReloaded: false
 
     }
   },
   mounted() {
     this.allData();
+    this.verificaLogin();
     
   },
   methods: {
-    async allData() {
-    
+    getAuthToken() {
+      const cookies = document.cookie.split('; ');
+      const jwtCookie = cookies.find(cookie => cookie.startsWith('jwt='));
+      console.log(jwtCookie)
+      return jwtCookie ? jwtCookie.split('=')[1] : null;
+    },
+    async verificaLogin() {
+
       try {
-        const {data, status} = await axios.get('http://127.0.0.1:8000/users/user/')
+
+        const token = this.getAuthToken();
+        const response = await axios.get('http://127.0.0.1:8000/users/User', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        const data = response.data;
+
+      } catch (error) {
+        this.$router.push('/Login')
+        console.error('Erro durante a solicitação:', error);
+      }
+    },
+    async allData() {
+
+      try {
+        const {data, status} = await axios.get('http://127.0.0.1:8000/users/register')
         console.log(data)
         if(status == 200){
           
@@ -118,7 +146,7 @@ export default {
           console.log(id)
         const { data, status } = await axios({
           method: "DELETE",
-          url: "http://127.0.0.1:8000/users/user/" + id,
+          url: "http://127.0.0.1:8000/users/register/" + id,
         });
         if (status === 200) {
           this.$message({
@@ -152,12 +180,11 @@ export default {
             
                 const {data, status} = await axios({
                     method: "PUT",
-                    url: "http://127.0.0.1:8000/sites/site/" + this.idSite,
+                    url: "http://127.0.0.1:8000/sites/register" + this.idSite,
                     data: {
                         name: this.name,
-                        link: this.link,
-                        logo: '',
-                        xpath: '',
+                        email: this.email,
+                        password: '',
                     }}).catch((error) => {
                              alert("Erro")
                             return {
