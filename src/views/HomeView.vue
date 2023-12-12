@@ -142,7 +142,8 @@ export default {
       showDropdown: false,
       dialogo: false,
       valor: '100',
-      aposta: null
+      aposta: null,
+      user: null
 
     }
 
@@ -172,6 +173,7 @@ export default {
         });
 
         const data = response.data;
+        this.user = response.data;
 
       } catch (error) {
         this.$router.push('/Login')
@@ -183,30 +185,51 @@ export default {
       try {
         const {data, status} = await axios.get('http://127.0.0.1:8000/sites/surebets/')
         console.log(data)
-        if(data.status == 200){
-          this.aposta = []
-          for(var i =0 ; i< data.surebets.length; i++){
-            var sure ={
-              name: data.surebets[i].TimeA.Event.Name,
-              date: '03 nov 2023',
-              teamA: data.surebets[i].TimeA.Time,
-              teamB: data.surebets[i].TimeB.Time,
-              bet1: data.surebets[i].TimeA.Odd,
-              bet2: data.surebets[i].TimeB.Odd,
-              porcent1: data.surebets[i].TimeA.Porcent,
-              porcent2: data.surebets[i].TimeB.Porcent,
-              siteA: data.surebets[i].TimeA.Site.Name,
-              siteB: data.surebets[i].TimeB.Site.Name,
-              valor: 100.00,
+
+        if (data.status === 200) {
+          this.aposta = [];
+          for (var i = 0; i < data.surebets.length; i++) {
+            const bet1 = data.surebets[i].TimeA.Odd;
+            const bet2 = data.surebets[i].TimeB.Odd;
+            const res = (1 / bet1) + (1 / bet2);
+            const averageOdds = (1 / res) * 100;
+
+            if (this.user.auth.premio == true) {
+              var sure = {
+                name: data.surebets[i].TimeA.Event.Name,
+                date: '03 nov 2023',
+                teamA: data.surebets[i].TimeA.Time,
+                teamB: data.surebets[i].TimeB.Time,
+                bet1: bet1,
+                bet2: bet2,
+                porcent1: data.surebets[i].TimeA.Porcent,
+                porcent2: data.surebets[i].TimeB.Porcent,
+                siteA: data.surebets[i].TimeA.Site.Name,
+                siteB: data.surebets[i].TimeB.Site.Name,
+                valor: 100.00,
+              };
+              this.aposta.push(sure);
+
+            }else{ if (averageOdds <= 121.0) {
+                var sure = {
+                  name: data.surebets[i].TimeA.Event.Name,
+                  date: '03 nov 2023',
+                  teamA: data.surebets[i].TimeA.Time,
+                  teamB: data.surebets[i].TimeB.Time,
+                  bet1: bet1,
+                  bet2: bet2,
+                  porcent1: data.surebets[i].TimeA.Porcent,
+                  porcent2: data.surebets[i].TimeB.Porcent,
+                  siteA: data.surebets[i].TimeA.Site.Name,
+                  siteB: data.surebets[i].TimeB.Site.Name,
+                  valor: 100.00,
+                };
+                this.aposta.push(sure);
+              }
             }
-            this.aposta.push(sure)
           }
-
-
-
-        }else{
-          this.aposta = null
-
+      }else{
+        this.aposta = null
 
         }
       } catch (error) {
