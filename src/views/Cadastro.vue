@@ -33,7 +33,7 @@
                 <button  @click="registration()" class="btn " >Sign Up</button>
             
             </div>
-              <RouterLink to="/Login" class="verde block text-xl  text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500" style="margin-left: 6em; ">Já tem uma conta?</RouterLink>
+              <RouterLink to="/Login" class="verde block text-xl  text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500" style="margin-left: 6em; margin-top: -1em">Já tem uma conta?</RouterLink>
         </div>
         <div class="flex justify-center items-start flex-col forms" >
               <img  src="../static/sureluck-logo.png" style=" padding-left: 2%; margin-top: 11%; width: 45%;" alt="">
@@ -200,6 +200,7 @@ select {
         background-color: #adaaa1;
     }
     #contCad {
+      position: fixed;
         width: 60em;
         height: 40em;
         border-radius: 30px;
@@ -215,12 +216,14 @@ select {
     
     #cadastro{
         position: absolute;
+        margin-left: 7.5em;
         top: 50%;
         left: 60%;
         transform: translate(-50%, -50%);
         background: #141C33;
         border-radius: 20px;
-        padding: 30px;
+        padding: 20px;
+         padding-right: 35px;
         width: auto;
         height: auto;
         align-items: center;

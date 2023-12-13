@@ -29,7 +29,7 @@
                 </li>
                 <li class="separator "></li>
                 <li class=" dropbtn ">
-                  <button class="" @click="toggleperfil">Perfil</button>
+                  <button class="ml-1.5" @click="toggleperfil"> Perfil</button>
                 </li>
                 <li class="separator "></li>
                 <li class=" dropbtn rounded-b">
@@ -188,6 +188,8 @@ export default {
   width: 100%;
   padding-left: 2em;
   padding-right: 2em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
   cursor: pointer;
   border: none;
   outline: none;

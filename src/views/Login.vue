@@ -1,10 +1,9 @@
 <template>
 
-   <div class=" center flex justify-center items-center ">
+   <div class="center flex justify-center items-center ">
         
-        <div id="contCad" class="bg-white w-96 h-96 ">
+        <div id="contCad" class="bg-white  ">
             <div id="cadastro">
-        
             <form class="flex justify-center items-center flex-col forms" action="">
               <div class="input flex  flex-col">
                 <span class="spanstyle">Email</span>
@@ -22,7 +21,7 @@
                 <button  @click="handleSubmit()" class="btn " >Sign In</button>
             
             </div>
-              <RouterLink to="/Cadastro" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500" style="margin-left: 5em; margin-bottom: 1em">Cadastre-se no Sureluck</RouterLink>
+              <RouterLink to="/Cadastro" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500" style="margin-left: 5em; margin-bottom: 1em; margin-top: -1em">Cadastre-se no Sureluck</RouterLink>
 
             </div>
         <div class="flex justify-center items-start flex-col forms" >
@@ -173,6 +172,7 @@ select {
         background-color: #adaaa1;
     }
     #contCad {
+      position: fixed;
         width: 60em;
         height: 30em;
         border-radius: 30px;
@@ -196,6 +196,7 @@ select {
         padding: 30px;
         width: auto;
         height: auto;
+      margin-left: 7.5em;
         align-items: center;
         color: #D98E04;
     }
