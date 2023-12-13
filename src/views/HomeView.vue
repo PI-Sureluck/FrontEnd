@@ -151,8 +151,9 @@ export default {
 
   },
   mounted() {
-    this.allData();
     this.verificaLogin();
+    this.allData();
+
 
   },
 
