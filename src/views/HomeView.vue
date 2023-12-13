@@ -187,7 +187,7 @@ export default {
 
       try {
         const {data, status} = await axios.get('http://127.0.0.1:8000/sites/surebets/')
-        console.log(data.surebets[0].TimeA.Site)
+        console.log(data.surebets[0])
 
         if (data.status === 200) {
           this.aposta = [];
