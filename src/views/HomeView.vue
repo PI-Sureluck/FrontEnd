@@ -149,10 +149,35 @@ export default {
   },
   mounted() {
     this.allData();
+    this.verificaLogin();
 
   },
 
   methods: {
+    getAuthToken() {
+      const cookies = document.cookie.split('; ');
+      const jwtCookie = cookies.find(cookie => cookie.startsWith('jwt='));
+      console.log(jwtCookie)
+      return jwtCookie ? jwtCookie.split('=')[1] : null;
+    },
+    async verificaLogin() {
+
+      try {
+
+        const token = this.getAuthToken();
+        const response = await axios.get('http://127.0.0.1:8000/users/User', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        const data = response.data;
+
+      } catch (error) {
+        this.$router.push('/Login')
+        console.error('Erro durante a solicitação:', error);
+      }
+    },
     async allData() {
 
       try {

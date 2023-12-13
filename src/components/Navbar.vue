@@ -1,42 +1,55 @@
 <template>
-<div>
+  <div>
+    <nav class="border-gray-200 bg fic">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="/" class="flex justify-normal">
+          <span class="self-center text-4xl font-semibold whitespace-nowrap text-white">Sure</span>
+          <span class="self-center verdelogo text-4xl font-semibold whitespace-nowrap text-white">Luck</span>
+        </a>
+        <div class="hidden w-full md:block md:w-auto mt-2 mb-2" id="navbar">
+          <ul class="font-medium content-center flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <li class="mr-1">
+              <router-link to="/" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Home</router-link>
+            </li>
+            <li v-if="admin === true" class="mr-1">
+              <router-link to="/Sites" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Casas de Aposta</router-link>
+            </li>
+            <li v-if="admin === true" class="mr-1">
+              <router-link to="/Users" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Usuários</router-link>
+            </li>
 
-<nav class="border-gray-200 bg fic ">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="/" class="flex justify-normal ">
-        <span class="self-center text-4xl font-semibold #171626whitespace-nowrap text-white">Sure</span>
-        <span class="self-center verdelogo text-4xl font-semibold #171626whitespace-nowrap text-white">Luck</span>
-    </a>
-    <div class="hidden w-full md:block md:w-auto mt-2 mb-2" id="navbar">
-      <ul class="font-medium content-center flex flex-col p-4  md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li class="mr-1">
-          <RouterLink to="/" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Home</RouterLink>
-        </li>
-        <li class="mr-1" >
-          <RouterLink to="/Sites" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Casas de Aposta</RouterLink>
-        </li>
-        <li class="mr-1" >
-          <RouterLink to="/Users" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">Usuários</RouterLink>
-        </li>
-        <li class=" mr-1">
-          <RouterLink to="/Login" class=" btn" @click="dialogVisible = true" >Sign In</RouterLink>
-        </li>
-        <li class="mr-1">
-          <RouterLink to="/Cadastro" class="btn" >Sign Up</RouterLink>
-        </li>
-      </ul>
+            <li class="relative">
+              <button @click="toggleDropdown" class="verde block text-lg  py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500">
+                {{ this.name }}
+              </button>
+              <ul v-show="isDropdownOpen"  v-if="isDropdownOpen"  ref="dropdown"  class="absolute z-50 left-1/2 transform -translate-x-1/2  rounded-md mt-3 bg-white flex flex-col items-center">
+                <li class="flex flex-col items-center">
+                  <h5 class="text-lg ">{{ this.name }}</h5>
+                  <h6 class="text-sm text-muted">{{ this.status }}</h6>
+                </li>
+                <li class="separator "></li>
+                <li class=" dropbtn ">
+                  <button class="" @click="toggleperfil">Perfil</button>
+                </li>
+                <li class="separator "></li>
+                <li class=" dropbtn rounded-b">
+                  <button @click="clearJwtCookieAndReload" class="" >Logout</button>
+                </li>
+              </ul>
+            </li>
 
-    </div>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
   </div>
-</nav>
-
-
-
-</div>
 </template>
-
 <script>
 import { RouterLink } from 'vue-router';
+import axios from "axios";
+import Cookies from 'js-cookie';
+
 
 
 const dialogVisible = true
@@ -47,11 +60,72 @@ export default {
 
   data() {
     return {
+      name:'',
+      email:'',
+      status:'',
 
+      isDropdownOpen: false,
+      perfil: false,
 
-    }},
+    }
+    }, mounted() {
+    this.allData();
+    document.addEventListener("click", this.closeDropdown);
+  },
+  beforeDestroy() {
+    document.removeEventListener("click", this.closeDropdown);
+  },
   methods: {
+    toggleperfil(){
+      this.perfil = !this.perfil
+      console.log("teste btn perfil")
+    },
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    },
+    closeDropdown() {
+      if (!this.$el.contains(event.target)) {
+        this.isDropdownOpen = false;
+      }
+    },
+    clearJwtCookieAndReload() {
+  // Limpar o cookie JWT
+  Cookies.remove('jwt');
 
+  // Recarregar a página
+  window.location.reload(true);
+  },
+    getAuthToken() {
+          const cookies = document.cookie.split('; ');
+          const jwtCookie = cookies.find(cookie => cookie.startsWith('jwt='));
+          console.log(jwtCookie)
+          return jwtCookie ? jwtCookie.split('=')[1] : null;
+        },
+
+    async allData() {
+      try {
+        const token = this.getAuthToken();
+
+        const response = await axios.get('http://127.0.0.1:8000/users/User', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        const data = response.data;
+
+        this.name = data.user.name.charAt(0).toUpperCase() + data.user.name.slice(1);
+        this.email = data.user.email
+        if(data.auth.premio){
+          this.status = "Premio"
+        }else {
+          this.status = "Padrão"
+        }
+        console.log('Dados recebidos:', response.data);
+      } catch (error) {
+        console.error('Erro durante a solicitação:', error);
+      }
+    }
   }
 }
 
@@ -108,43 +182,30 @@ export default {
 
 .dropbtn {
   background-color: transparent;
-  overflow: hidden;
-  color:#4ef3ff;
-  padding: 2rem;
+  color: #000000;
+  width: 100%;
+  padding-left: 2em;
+  padding-right: 2em;
   cursor: pointer;
   border: none;
   outline: none;
-  font-family: 'Rubik', sans-serif;
   font-size: 18px;
 }
 
-.dropdown {
-  display: block;
+.dropbtn:hover {
+  background-color: #eeeeee;
+
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 18px;
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #FAF9F6;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  font-family: 'Rubik', sans-serif;
-  font-size: 13px;
-}
 
-.dropdown-content a:hover {background-color: hsla(160, 100%, 37%, 0.2)}
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+
+
 
 .bg {
   background-color: #171627;
@@ -286,5 +347,10 @@ select {
         font-size: 15px;
     }
 
+.separator {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+}
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-   <form @submit.prevent="handleSubmit">
+
    <div class=" center flex justify-center items-center ">
         
         <div id="contCad" class="bg-white w-96 h-96 ">
@@ -13,16 +13,18 @@
               </div>              
               <div class="input flex  flex-col " >
                 <span class="spanstyle">Password</span>
-                  <el-input type="password" class="inputs"  show-password="true" size="medium" autocomplete="off" placeholder="Password" v-model="Password"></el-input>
+                  <el-input type="password" class="inputs"  :show-password="true" size="medium" autocomplete="off" placeholder="Password" v-model="Password"></el-input>
 
               </div>              
               
             </form>
             <div class="flex justify-center items-center flex-col forms">
-                <button  @click="registration()" class="btn " >Sign In</button>
+                <button  @click="handleSubmit()" class="btn " >Sign In</button>
             
             </div>
-        </div>
+              <RouterLink to="/Cadastro" class="verde block text-xl py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500" style="margin-left: 5em; margin-bottom: 1em">Cadastre-se no Sureluck</RouterLink>
+
+            </div>
         <div class="flex justify-center items-start flex-col forms" >
               <img  src="../static/sureluck-logo.png" style=" padding-left: 2%; margin-top: 3.5%; width: 45%;" alt="">
             </div>
@@ -30,17 +32,19 @@
             
             
       </div>
-    </form>
+
     
       
     </template>
     
     <script>
      import axios, * as others from 'axios';
+     import { useCookies } from 'vue-cookie';
+     import { useRouter } from 'vue-router';
     export default {
-       
+
         data() {
-    
+
     return {
       Email: '',
       Password: '',
@@ -49,18 +53,45 @@
    
   },
   methods: {
-    async handleSubmit(){
-        const response = await axios.post('login', {
-            Email: this.Email,
-            Password: this.Password
+
+    async handleSubmit() {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            email: this.Email,
+            password: this.Password,
+          }),
         });
 
-        console.log(response);
-    }
-    
+        if (!response.ok) {
+          console.error('Erro na solicitação:', response.status, response.statusText);
+          return;
+        }
 
-  }
-}
+        const responseData = await response.json();
+        const jwtToken = responseData.jwt;
+
+        document.cookie = `jwt=${jwtToken}; path=/;`;
+
+        console.log('Token JWT armazenado nos cookies:', jwtToken);
+
+        this.$router.push('/')
+
+      } catch (error) {
+        console.error('Erro durante a solicitação:', error);
+      }
+    }
+
+
+    }
+
+
+    }
     
     </script>
     

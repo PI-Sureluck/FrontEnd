@@ -33,6 +33,7 @@
                 <button  @click="registration()" class="btn " >Sign Up</button>
             
             </div>
+              <RouterLink to="/Login" class="verde block text-xl  text-white bg-blue-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-white-500" style="margin-left: 6em; ">Já tem uma conta?</RouterLink>
         </div>
         <div class="flex justify-center items-start flex-col forms" >
               <img  src="../static/sureluck-logo.png" style=" padding-left: 2%; margin-top: 11%; width: 45%;" alt="">
@@ -68,7 +69,7 @@
 
                 const {data, status} = await axios({
                     method: "POST",
-                    url: "http://127.0.0.1:8000/users/user/",
+                    url: "http://127.0.0.1:8000/users/register",
                     data: {
                         name: this.Username,
                         email: this.Email,

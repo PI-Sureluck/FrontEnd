@@ -1,16 +1,20 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
+
+
 import Footer from './components/FooterSure.vue'
 </script>
 
 <template>
 
-  <Navbar />
+  <Navbar v-if="$route.path !== '/Cadastro' && $route.path !== '/Login'&& $route.path !== '/login'" />
   <RouterView />
 
 
 </template>
+
+
 
 <style>
   body {
