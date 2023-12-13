@@ -63,6 +63,7 @@ export default {
       name:'',
       email:'',
       status:'',
+      admin:'',
 
       isDropdownOpen: false,
       perfil: false,
@@ -116,6 +117,7 @@ export default {
 
         this.name = data.user.name.charAt(0).toUpperCase() + data.user.name.slice(1);
         this.email = data.user.email
+        this.admin = data.auth.admin
         if(data.auth.premio){
           this.status = "Premio"
         }else {

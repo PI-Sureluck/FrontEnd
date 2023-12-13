@@ -77,13 +77,15 @@
                   <div class="flex justify-between p-6">
                     <h5
                         class="p-2 text-xl font-medium italic leading-tight text-neutral-800 dark:text-neutral-50 " style="margin-top: 30px">
-                      {{ aposta.teamA }} <p> </p><p> </p> <p> </p>  {{ aposta.teamB }}
+                      {{ aposta.teamA }} <p></p><p> </p> <p> </p>  {{ aposta.teamB }}
                     </h5>
                     <p class="border-dashed border-2 rounded-md p-2 pl-2 text-base text-neutral-600 dark:text-neutral-200 odds-layout" style="font-size: small; width: auto " >
-                      {{ aposta.siteA }} <p></p>
+                    <a v-if="this.user.auth.premio" :href="aposta.siteA.Link"  target="_blank" >{{ aposta.siteA.Name }}</a>
+                      <p v-else> {{ aposta.siteA.Name }}</p> <p></p>
                       {{ aposta.bet1 }}
                       <hr class="my-2">
-                      {{ aposta.siteB }} <p></p>
+                      <a  v-if="this.user.auth.premio" :href="aposta.siteB.Link" target="_blank" >{{ aposta.siteB.Name }}</a>
+                      <p v-else> {{ aposta.siteB.Name }}</p> <p></p>
                       {{ aposta.bet2 }}
 
                     </p>
@@ -184,7 +186,7 @@ export default {
 
       try {
         const {data, status} = await axios.get('http://127.0.0.1:8000/sites/surebets/')
-        console.log(data)
+        console.log(data.surebets[0].TimeA.Site)
 
         if (data.status === 200) {
           this.aposta = [];
@@ -193,7 +195,6 @@ export default {
             const bet2 = data.surebets[i].TimeB.Odd;
             const res = (1 / bet1) + (1 / bet2);
             const averageOdds = (1 / res) * 100;
-
             if (this.user.auth.premio == true) {
               var sure = {
                 name: data.surebets[i].TimeA.Event.Name,
@@ -204,8 +205,8 @@ export default {
                 bet2: bet2,
                 porcent1: data.surebets[i].TimeA.Porcent,
                 porcent2: data.surebets[i].TimeB.Porcent,
-                siteA: data.surebets[i].TimeA.Site.Name,
-                siteB: data.surebets[i].TimeB.Site.Name,
+                siteA: data.surebets[i].TimeA.Site,
+                siteB: data.surebets[i].TimeB.Site,
                 valor: 100.00,
               };
               this.aposta.push(sure);
@@ -220,8 +221,8 @@ export default {
                   bet2: bet2,
                   porcent1: data.surebets[i].TimeA.Porcent,
                   porcent2: data.surebets[i].TimeB.Porcent,
-                  siteA: data.surebets[i].TimeA.Site.Name,
-                  siteB: data.surebets[i].TimeB.Site.Name,
+                  siteA: data.surebets[i].TimeA.Site,
+                  siteB: data.surebets[i].TimeB.Site,
                   valor: 100.00,
                 };
                 this.aposta.push(sure);
