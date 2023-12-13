@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
-console.log("teste foda dmsi")
+
 
 import Footer from './components/FooterSure.vue'
 </script>
